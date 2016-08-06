@@ -1,0 +1,4 @@
+import:
+
+- package: github.com/icrowley/fake
+  version: 84bff6d01560fb0b5a396ba29534e93fd00d09c6
