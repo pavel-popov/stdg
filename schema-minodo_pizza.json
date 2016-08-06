@@ -1,0 +1,25 @@
+{
+    "email": {
+        "type": "uniq_email",
+        "pct_empty": 0
+    },
+    "filial_id": {
+        "type": "enum",
+        "values": ["1", "2"]
+    },
+    "reg_timestamp": {
+        "type": "unix_timestamp",
+        "date_low_boundary": "2014-06-01T00:00:00+00:00"
+    },
+    "orders_last_month": {
+        "type": "norm_int32",
+        "mean": 5,
+        "stddev": 5
+    },
+    "payment_sum": {
+        "type": "norm_multiplier_key",
+        "mean": 800,
+        "stddev": 300,
+        "key": "orders_last_month"
+    }
+}

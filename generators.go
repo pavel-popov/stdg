@@ -6,6 +6,8 @@ import (
 	"math/rand"
 	"strconv"
 	"time"
+
+	"github.com/icrowley/fake"
 )
 
 // Enum picks randomly one value from slice of strings.
@@ -37,6 +39,12 @@ func Date(format string, lowBoundary time.Time) string {
 	return result.Format(format)
 }
 
+// UnixTimestamp returns time in unix timestamp format.
+func UnixTimestamp(lowBoundary time.Time) string {
+	result := lowBoundary.Add(time.Duration(rand.Int63n(int64(time.Since(lowBoundary)))))
+	return fmt.Sprintf("%d", result.UnixNano())
+}
+
 // NormInt32 return Int32 having Normal distribution across mean with stddev.
 func NormInt32(mean, stddev float64) string {
 	return fmt.Sprintf("%.0f", math.Abs(rand.NormFloat64()*stddev+mean))
@@ -52,4 +60,20 @@ func NormMultiplierKey(key string, mean, stddev float64) string {
 	avgPrice := math.Abs(rand.NormFloat64()*stddev + mean)
 	//Debug.Printf("Avg price: %f", avgPrice)
 	return fmt.Sprintf("%.2f", keyVal*avgPrice)
+}
+
+var uniqEmail = make(map[string]struct{})
+
+// UniqEmail generates unique email address.
+func UniqEmail() string {
+	email := fake.EmailAddress()
+	if _, ok := uniqEmail[email]; ok {
+		return UniqEmail()
+	}
+	uniqEmail[email] = struct{}{}
+	return email
+}
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
 }

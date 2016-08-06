@@ -100,10 +100,14 @@ func generateValue(field Field, keyVal string) (string, error) {
 		val = Enum(field.KeyValues[keyVal])
 	case "date":
 		val = Date(field.DateFormat, field.DateLowBoundary)
+	case "unix_timestamp":
+		val = UnixTimestamp(field.DateLowBoundary)
 	case "norm_int32":
 		val = NormInt32(field.Mean, field.StdDev)
 	case "norm_multiplier_key":
 		val = NormMultiplierKey(keyVal, field.Mean, field.StdDev)
+	case "uniq_email":
+		val = UniqEmail()
 	}
 	return emptier(val, field.PctEmpty), nil
 }
@@ -146,6 +150,7 @@ func generateRow(keys []string, schema map[string]Field) (record []string, err e
 func main() {
 
 	wr := csv.NewWriter(os.Stdout)
+	wr.Write(config.Keys)
 	for i := 0; i < config.Rows; i++ {
 		row, err := generateRow(config.Keys, config.Schema)
 		if err != nil {
