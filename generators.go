@@ -42,7 +42,7 @@ func Date(format string, lowBoundary time.Time) string {
 // UnixTimestamp returns time in unix timestamp format.
 func UnixTimestamp(lowBoundary time.Time) string {
 	result := lowBoundary.Add(time.Duration(rand.Int63n(int64(time.Since(lowBoundary)))))
-	return fmt.Sprintf("%d", result.UnixNano())
+	return fmt.Sprintf("%d", result.Unix())
 }
 
 // NormInt32 return Int32 having Normal distribution across mean with stddev.
