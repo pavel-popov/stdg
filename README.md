@@ -3,12 +3,15 @@
 Simple app generating test data based on JSON configuration file. Uses [fake]
 golang module.
 
-## Building
+## Getting
 
-    go build
+    go get github.com/pavel-popov/stdg
 
 ## Usage
 
-    stdg -config config.json -rows 10000
+    stdg -schema config.json -rows 10000 -columns a,b,c
 
-[fake]: https://github.com/icrowley/fake
+
+## References
+
+* [fake](https://github.com/icrowley/fake)
