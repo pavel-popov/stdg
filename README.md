@@ -14,4 +14,7 @@ golang module.
 
 ## References
 
-* [fake](https://github.com/icrowley/fake)
+* [fake]
+
+
+[fake]: https://github.com/icrowley/fake
